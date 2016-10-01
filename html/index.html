@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Xhr remote page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="xhrStatus"></div>
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript" src="js/remotePage.js"></script>
+        <script type="text/javascript" src="js/localPage.js"></script>
+        <script>
+            
+            var rpInstance, lpInstance, styles;
+            
+            function rpCallback(){
+                var response = rpInstance.getResponse();
+                lpInstance = new localPage(response);
+                console.log(lpInstance);
+                
+                styles = rpInstance.getResponse()
+                    .querySelectorAll('link[type="text/css"]');
+            
+                var head = document.querySelector('head');
+                
+                styles.forEach(
+                    function(element, index, array) {
+                        head.appendChild(element);
+                    }
+                );
+            }
+            
+            function init(){
+                rpInstance = new remotePage();
+                rpInstance.setMethod('GET')
+                    .setUrl('http://laraops.pier-infor.fr/')
+                    .setCallback(rpCallback)
+                    .load();
+                rpPayload = rpInstance.getPayload();
+            }
+            ready(init);
+        </script>
+    </body>
+</html>
