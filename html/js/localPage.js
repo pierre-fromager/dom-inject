@@ -35,11 +35,34 @@ var localPage = function (response) {
     }
     
     _setContainer = function () {
-        that.container = _select('.container');
+        that.container = _select('.wrapper');
     }
     
     _setFooter = function () {
         that.footer = _select('footer');
+    }
+    
+    _inject = function (anchor, node) {
+        anchor.appendChild(node);
+    }
+    
+    _injectMany  = function (anchor, nodes) {
+        nodes.forEach(
+            function(element, index, array) {
+                anchor.appendChild(element);
+            }
+        );
+        return this;
+    }
+    
+    this.inject = function (anchor, nodes) {
+        var constructoName = nodes.constructor.name;
+        if (constructoName === 'NodeList') {
+            _injectMany(anchor, nodes);
+        } else {
+            _inject(anchor, nodes);
+        }
+        return this;
     }
     
     this.init = function () {

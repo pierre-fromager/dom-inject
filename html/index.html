@@ -4,31 +4,27 @@
         <title>Xhr remote page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div id="xhrStatus"></div>
         <script type="text/javascript" src="js/common.js"></script>
         <script type="text/javascript" src="js/remotePage.js"></script>
         <script type="text/javascript" src="js/localPage.js"></script>
+    </head>
+    <body>
+        <div id="xhrStatus"></div>
+
         <script>
             
             var rpInstance, lpInstance, styles;
             
             function rpCallback(){
-                var response = rpInstance.getResponse();
-                lpInstance = new localPage(response);
-                console.log(lpInstance);
+                lpInstance = new localPage(rpInstance.getResponse());
                 
-                styles = rpInstance.getResponse()
-                    .querySelectorAll('link[type="text/css"]');
-            
                 var head = document.querySelector('head');
+                lpInstance.inject(head, lpInstance.styles);
+                lpInstance.inject(head, lpInstance.scripts);
                 
-                styles.forEach(
-                    function(element, index, array) {
-                        head.appendChild(element);
-                    }
-                );
+                var body = document.querySelector('body');
+                lpInstance.inject(body, lpInstance.container);
+                
             }
             
             function init(){
