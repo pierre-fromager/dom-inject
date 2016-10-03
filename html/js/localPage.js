@@ -22,12 +22,41 @@ var localPage = function (response) {
         that.metas = _selectAll('meta');
     }
     
+    _isValidUrl = function (str) {
+        var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+        return (regex.test(str));           
+    }
+    
     _setStyles = function () {
-        that.styles = _selectAll('link[type="text/css"]');
+        that.styles = _selectAll('link[type="text/css"],link[rel="stylesheet"]');
+        if (that.styles) {
+            var baseURI = that.styles[0].baseURI;
+            that.styles.forEach(
+                function(element, index, array) {
+                     var remoteLink = element.getAttribute('href');
+                    if (_isValidUrl(remoteLink) === false) {
+                        element.setAttribute('href', baseURI + remoteLink);
+                        array[index] = element;
+                    }
+                }
+            );
+        }
     }
     
     _setScripts = function () {
         that.scripts = _selectAll('script[src]');
+        if (that.scripts) {
+            var baseURI = that.styles[0].baseURI;
+            that.scripts.forEach(
+                function(element, index, array) {
+                     var remoteLink = element.getAttribute('src');
+                    if (_isValidUrl(remoteLink) === false) {
+                        element.setAttribute('src', baseURI + remoteLink);
+                        array[index] = element;
+                    }
+                }
+            );
+        }
     }
     
     _setHeader = function () {
