@@ -55,12 +55,22 @@ var localPage = function (response) {
         return this;
     }
     
+    _isInstanciated = function (obj) {
+        return (
+            (obj != null) 
+            && (typeof obj == 'object')  
+            && (typeof obj.constructor == 'function')
+        );
+    }
+    
     this.inject = function (anchor, nodes) {
-        var constructoName = nodes.constructor.name;
-        if (constructoName === 'NodeList') {
-            _injectMany(anchor, nodes);
-        } else {
-            _inject(anchor, nodes);
+        if (_isInstanciated(nodes)) {
+            var constructoName = nodes.constructor.name;
+            if (constructoName === 'NodeList') {
+                _injectMany(anchor, nodes);
+            } else {
+                _inject(anchor, nodes);
+            }
         }
         return this;
     }
