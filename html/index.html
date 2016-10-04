@@ -4,38 +4,11 @@
         <title>Xhr remote page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
         <script type="text/javascript" src="js/common.js"></script>
         <script type="text/javascript" src="js/remotePage.js"></script>
         <script type="text/javascript" src="js/localPage.js"></script>
-    </head>
-    <body>
-        <div id="xhrStatus"></div>
-
-        <script>
-            
-            var rpInstance, lpInstance, styles;
-            
-            function rpCallback(){
-                lpInstance = new localPage(rpInstance.getResponse());
-                
-                var head = document.querySelector('head');
-                lpInstance.inject(head, lpInstance.styles);
-                lpInstance.inject(head, lpInstance.scripts);
-                
-                var body = document.querySelector('body');
-                lpInstance.inject(body, lpInstance.container);
-                
-            }
-            
-            function init(){
-                rpInstance = new remotePage();
-                rpInstance.setMethod('GET')
-                    .setUrl('http://chatons2016.pier-infor.fr/')
-                    .setCallback(rpCallback)
-                    .load();
-                rpPayload = rpInstance.getPayload();
-            }
-            ready(init);
-        </script>
+        <script type="text/javascript" src="js/runInject.js"></script>
     </body>
 </html>
