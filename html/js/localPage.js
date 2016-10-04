@@ -29,37 +29,45 @@ var localPage = function (response) {
 
     _setStyles = function () {
         that.styles = _selectAll('link[type="text/css"],link[rel="stylesheet"]');
+        var styles = [];
         if (that.styles) {
             var baseURI = that.styles[0].baseURI;
             for (var i = 0, len = that.styles.length; i < len; i++) {
                 var element = that.styles[i];
                 var hrefAttr = element.getAttribute('href');
                 var remoteLink = (_isValidUrl(hrefAttr))
-                    ? remoteLink
-                    : baseURI + remoteLink;
-                var style = document.createElement('style');
-                style.setAttribute('href', remoteLink);
-                that.styles[i] = style;
+                    ? hrefAttr
+                    : baseURI + hrefAttr;
+                var ts = new Date().getTime();
+                element.setAttribute('href', remoteLink + '?ts=' + ts);
+                element.setAttribute('data-ts', ts);
+                styles.push(element);
             }
         }
+        that.styles = styles;
+        delete styles;
     }
 
     _setScripts = function () {
         that.scripts = _selectAll('script[src]');
+        var scripts = [];
         if (that.scripts) {
-            var baseURI = that.styles[0].baseURI;
+            var baseURI = that.scripts[0].baseURI;
             for (var i = 0, len = that.scripts.length; i < len; i++) {
                 var element = that.scripts[i];
                 var srcAttr = element.getAttribute('src');
                 var remoteLink = (_isValidUrl(srcAttr))
-                    ? remoteLink
-                    : baseURI + remoteLink;
-                var script = document.createElement('script');
-                script.setAttribute('src', remoteLink);
-                script.setAttribute('type', 'text/javascript');
-                that.scripts[i] = script;
+                    ? srcAttr
+                    : baseURI + srcAttr;
+                element.setAttribute('src', remoteLink);
+                element.setAttribute('type', 'text/javascript');
+                var ts = new Date().getTime();
+                element.setAttribute('data-ts', ts);
+                scripts.push(element);
             }
         }
+        that.scripts = scripts;
+        delete scripts;
     }
 
     _setHeader = function () {
@@ -80,7 +88,7 @@ var localPage = function (response) {
 
     _injectMany = function (anchor, nodes) {
         for (var i = 0, len = nodes.length; i < len; i++) {
-            anchor.appendChild(nodes[i]);
+            _inject(anchor, nodes[i]);
         }
         return this;
     }
@@ -92,11 +100,16 @@ var localPage = function (response) {
             && (typeof obj.constructor == 'function')
         );
     }
+    
+    _isArray = function (obj) {
+        return (Object.prototype.toString.call(obj) === '[object Array]');
+    }
 
     this.inject = function (anchor, nodes) {
-        if (_isInstanciated(nodes)) {
-            var constructoName = nodes.constructor.name;
-            if (constructoName === 'NodeList') {
+        var objType = Object.prototype.toString.call(nodes);
+        if (objType !== '[object Null]') {
+            var constructorName = nodes.constructor.name;
+            if (constructorName === 'NodeList' || _isArray(nodes)) {
                 _injectMany(anchor, nodes);
             } else {
                 _inject(anchor, nodes);
@@ -108,7 +121,9 @@ var localPage = function (response) {
     this.init = function () {
         _setMetas();
         _setStyles();
+        this.styles = that.styles;
         _setScripts();
+        this.scripts = that.scripts;
         _setHeader();
         _setContainer();
         _setFooter();
