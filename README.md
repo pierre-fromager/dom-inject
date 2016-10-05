@@ -1,8 +1,8 @@
 # dom-inject
 
-####Weary using iframe and postMessage ?
+#### Weary using iframe and postMessage ?
     
-####&nbsp;&nbsp; ...try dom injection !
+#### &nbsp;&nbsp; ...try dom injection !
 
 &nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , 2 libs implementation that let you remote dom injection from external source to a local page.
 
@@ -57,10 +57,10 @@
     
 ## Compliancy
 
->Dom-inject has been tested on
+&nbsp; Dom-inject has been tested on
 
-&nbsp; * *Windows*, *Osx*, *Linux* plateforms.
-&nbsp; * *Chrome*, *Firefox*, *Safari*, *Edge* navigators.
+* *Windows*, *Osx*, *Linux* plateforms.
+* *Chrome*, *Firefox*, *Safari*, *Edge* navigators.
 
 ## Conclusion
 
