@@ -26,6 +26,29 @@ var localPage = function (response) {
         var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
         return (regex.test(str));
     }
+    
+    _getPatchedDomElement = function (element, baseURI) {
+        var type = _getType(element);
+        if (type == '[object HTMLLinkElement]'){
+            var srcAttr = element.getAttribute('href');
+            var remoteLink = (_isValidUrl(srcAttr))
+                ? srcAttr
+                : baseURI + srcAttr;
+            element.setAttribute('href', remoteLink);
+        }
+        if (type == '[object HTMLScriptElement]') {
+            var srcAttr = element.getAttribute('src');
+            var remoteLink = (_isValidUrl(srcAttr))
+                ? srcAttr
+                : baseURI + srcAttr;
+            element.setAttribute('src', remoteLink);
+            element.setAttribute('type', 'text/javascript');
+        }
+
+        var ts = new Date().getTime();
+        element.setAttribute('data-ts', ts);
+        return element;
+    }
 
     _setStyles = function () {
         that.styles = _selectAll('link[type="text/css"],link[rel="stylesheet"]');
@@ -33,15 +56,7 @@ var localPage = function (response) {
         if (that.styles) {
             var baseURI = that.styles[0].baseURI;
             for (var i = 0, len = that.styles.length; i < len; i++) {
-                var element = that.styles[i];
-                var hrefAttr = element.getAttribute('href');
-                var remoteLink = (_isValidUrl(hrefAttr))
-                    ? hrefAttr
-                    : baseURI + hrefAttr;
-                var ts = new Date().getTime();
-                element.setAttribute('href', remoteLink + '?ts=' + ts);
-                element.setAttribute('data-ts', ts);
-                styles.push(element);
+                styles.push(_getPatchedDomElement(that.styles[i], baseURI));
             }
         }
         that.styles = styles;
@@ -54,16 +69,7 @@ var localPage = function (response) {
         if (that.scripts) {
             var baseURI = that.scripts[0].baseURI;
             for (var i = 0, len = that.scripts.length; i < len; i++) {
-                var element = that.scripts[i];
-                var srcAttr = element.getAttribute('src');
-                var remoteLink = (_isValidUrl(srcAttr))
-                    ? srcAttr
-                    : baseURI + srcAttr;
-                element.setAttribute('src', remoteLink);
-                element.setAttribute('type', 'text/javascript');
-                var ts = new Date().getTime();
-                element.setAttribute('data-ts', ts);
-                scripts.push(element);
+                scripts.push(_getPatchedDomElement(that.scripts[i], baseURI));
             }
         }
         that.scripts = scripts;
@@ -101,12 +107,16 @@ var localPage = function (response) {
         );
     }
     
+    _getType = function (obj) {
+        return (Object.prototype.toString.call(obj));
+    }
+    
     _isArray = function (obj) {
-        return (Object.prototype.toString.call(obj) === '[object Array]');
+        return (_getType(obj) === '[object Array]');
     }
 
     this.inject = function (anchor, nodes) {
-        var objType = Object.prototype.toString.call(nodes);
+        var objType = _getType(nodes);
         if (objType !== '[object Null]') {
             var constructorName = nodes.constructor.name;
             if (constructorName === 'NodeList' || _isArray(nodes)) {
