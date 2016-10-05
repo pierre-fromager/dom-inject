@@ -4,9 +4,11 @@
     
 >#### => Try dom injection !
 
->>**dom-inject** is a *vanilla js* remote dom injector from external source to a local page.
+>>**dom-inject** is a *vanilla js* , *ES5* , 2 libs implementation.
 
->>Using *Xhr request* implies *cross domain origin policy* to be set.
+>>It let you remote dom injection from external source to a local page.
+
+>>*Xhr request* usage implies *cross domain origin policy* to be set.
 
 >>You can easily set it with a *specific header* from yours favourite languages or middlewares.
 
@@ -60,7 +62,7 @@
 >Dom-inject has been tested on
 
 >* *Windows*, *Osx*, *Linux* plateforms.
->* *Chrome*, *Firefox*, *Safari* navigators.
+>* *Chrome*, *Firefox*, *Safari*, *Edge* navigators.
 
 ## Conclusion
 
