@@ -57,10 +57,10 @@
     
 ## Compliancy
 
-&nbsp; Dom-inject has been tested on
+&nbsp; **Dom-inject** has been tested on
 
-* *Windows*, *Osx*, *Linux* plateforms.
-* *Chrome*, *Firefox*, *Safari*, *Edge* navigators.
+* *Windows*, *Osx*, *Linux*.
+* *Chrome*, *Firefox*, *Safari*, *Edge*.
 
 ## Conclusion
 
