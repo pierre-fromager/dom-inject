@@ -89,6 +89,7 @@ var localPage = function (response) {
     }
 
     _inject = function (anchor, node) {
+        console.log('Injecting a ' + _getType(node));
         anchor.appendChild(node);
     }
 
