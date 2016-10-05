@@ -1,10 +1,5 @@
 var rpInstance, lpInstance;
 
-
-function deferedScripts(anchor) {
-    lpInstance.inject(anchor, lpInstance.scripts);
-}
-
 function rpCallback() {
     lpInstance = new localPage(rpInstance.getResponse());
     var head = document.querySelector('head');
