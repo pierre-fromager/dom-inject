@@ -2,11 +2,9 @@
 
 >####Weary using iframe and postMessage ?
     
->#### => Try dom injection !
+>#### ...try dom injection !
 
->>**dom-inject** is a *vanilla js* , *ES5* , 2 libs implementation.
-
->>It let you remote dom injection from external source to a local page.
+>>**dom-inject** is a *vanilla js* , *ES5* , 2 libs implementation that let you remote dom injection from external source to a local page.
 
 >>*Xhr request* usage implies *cross domain origin policy* to be set.
 
