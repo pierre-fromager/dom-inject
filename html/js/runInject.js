@@ -1,4 +1,4 @@
-var rpInstance, lpInstance, styles;
+var rpInstance, lpInstance, styles, allowChainScript;
 
 
 function deferedScripts(anchor) {
@@ -12,24 +12,31 @@ function rpCallback() {
     lpInstance.inject(head, lpInstance.styles);
 
     // http://stackoverflow.com/questions/807878/javascript-that-executes-after-page-load
-    if (window.addEventListener)
-        window.addEventListener("load", deferedScripts, false);
-    else if (window.attachEvent)
-        window.attachEvent("onload", deferedScripts);
-    else
-        window.onload = deferedScripts;
 
     var body = document.querySelector('body');
     lpInstance.inject(body, lpInstance.container);
-
+    
+    lpInstance.inject(head, lpInstance.scripts);
+    lpInstance.injectScripts(head);
+    /*
+    var testScript = document.createElement('script');
+    testScript.type = 'text/javascript';
+    testScript.src = 'http://laraops.pier-infor.fr/vendor/jquery/jquery-2.1.1.min.js';
+    testScript.async = true;
+    testScript.defer = true;
+    testScript.setAttribute('data-ts',new Date().getTime());
+    head.appendChild(testScript);
+    console.log('jQuery version : ' + jQuery.fn.jquery);*/
+    //lpInstance.inject(body, lpInstance.scripts);
 }
 
 function init() {
     rpInstance = new remotePage();
     rpInstance.setMethod('GET')
-            .setUrl('http://laraops.pier-infor.fr/')
-            .setCallback(rpCallback)
-            .load();
-    rpPayload = rpInstance.getPayload();
+        .setUrl('http://laraops.pier-infor.fr/')
+        .setCallback(rpCallback)
+        .load();
+    //rpPayload = rpInstance.getPayload();
 }
+
 ready(init);

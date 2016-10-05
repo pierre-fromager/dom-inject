@@ -41,12 +41,12 @@ var localPage = function (response) {
             var remoteLink = (_isValidUrl(srcAttr))
                 ? srcAttr
                 : baseURI + srcAttr;
-            element.setAttribute('src', remoteLink);
-            element.setAttribute('type', 'text/javascript');
+            element.src = remoteLink;
+                /*
+            element = that.root.createElement('script');
+            element.src = remoteLink;
+            element.type = 'text/javascript';*/
         }
-
-        var ts = new Date().getTime();
-        element.setAttribute('data-ts', ts);
         return element;
     }
 
@@ -128,6 +128,32 @@ var localPage = function (response) {
         }
         return this;
     }
+    
+    this.injectScripts = function (anchor) {
+        if (typeof files == 'undefined') {
+            var files = [];
+            for (var i = 0, len = that.scripts.length; i < len; i++) {
+                files.push(that.scripts[i].getAttribute('src'));
+            }
+        }
+        function loadFile(index) {
+            if (files.length > index) {
+                var fileref = document.createElement('script');
+                fileref.setAttribute("type", "text/javascript");
+                fileref.setAttribute("src", files[index]);
+                fileref.setAttribute("data-ts", new Date().getTime());
+                anchor.appendChild(fileref);
+                index = index + 1;
+                fileref.onload = function () {
+                    loadFile(index);
+                }
+            } else {
+                console.info('Scripts loaded');
+            }
+        }
+        loadFile(0);
+        return this;
+    }
 
     this.init = function () {
         _setMetas();
@@ -144,5 +170,4 @@ var localPage = function (response) {
     if (typeof this.response !== 'undefined') {
         this.init();
     }
-
 }

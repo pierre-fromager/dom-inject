@@ -1,5 +1,4 @@
 
-
 function ready(readyCallback) {
     if (document.readyState != 'loading') {
         readyCallback();
