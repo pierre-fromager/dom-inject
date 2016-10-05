@@ -42,10 +42,6 @@ var localPage = function (response) {
                 ? srcAttr
                 : baseURI + srcAttr;
             element.src = remoteLink;
-                /*
-            element = that.root.createElement('script');
-            element.src = remoteLink;
-            element.type = 'text/javascript';*/
         }
         return element;
     }
@@ -89,7 +85,6 @@ var localPage = function (response) {
     }
 
     _inject = function (anchor, node) {
-        console.log('Injecting a ' + _getType(node));
         anchor.appendChild(node);
     }
 
