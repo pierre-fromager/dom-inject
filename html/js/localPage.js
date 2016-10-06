@@ -10,24 +10,62 @@ var localPage = function (response) {
     this.header = null;
     this.container = null;
     this.footer = null;
-
+    
+    /**
+     * _selectAll
+     * 
+     * grab dom elements from response  for a given selector pattern 
+     * and retruns matching NodeList
+     * 
+     * @param {string} selector
+     * @returns {NodeList}
+     */
     _selectAll = function (selector) {
         return that.response.querySelectorAll(selector);
     }
-
+    
+    /**
+     * _select
+     * 
+     * @param {string} selector
+     * @returns {Node}
+     */
     _select = function (selector) {
         return that.response.querySelector(selector);
     }
 
+    /**
+     * _setMetas
+     * 
+     * @returns {undefined}
+     */
     _setMetas = function () {
         that.metas = _selectAll('meta');
     }
 
-    _isValidUrl = function (str) {
+    
+    /**
+     * _isValidUrl
+     * 
+     * url validator returns true if the given url is valid
+     * 
+     * @param {string} url
+     * @returns {Boolean}
+     */
+    _isValidUrl = function (url) {
         var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-        return (regex.test(str));
+        return (regex.test(url));
     }
     
+    /**
+     * _getPatchedDomElement
+     * 
+     * patches src or href attribute to match a full domain url
+     * 
+     * @param {DomElement} element
+     * @param {String} baseURI
+     * @returns {DomElement}
+     */
     _getPatchedDomElement = function (element, baseURI) {
         var type = _getType(element);
         if (type == '[object HTMLLinkElement]'){
