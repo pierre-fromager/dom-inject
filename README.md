@@ -10,6 +10,8 @@
 
 &nbsp;&nbsp; 2 libs (localPage, remotePage) let you inject external resources to local page.
 
+&nbsp;&nbsp; Both libs have fluent interfaces.
+
 &nbsp;&nbsp; *Xhr request* usage implies *cross domain origin policy* to be set.
 
 &nbsp;&nbsp; You can easily set it with a *specific header* from yours 
@@ -23,9 +25,7 @@ from the remote.
 
 ### remotePage.js
 
-&nbsp; is Xhr mechanism to set remote Dom into the response as a document.
-
-&nbsp; The interface is fluent for methods chaining.
+&nbsp; Xhr mechanism to set remote Dom into the response as a document.
 
 #### 4 public methods 
 
