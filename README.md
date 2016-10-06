@@ -55,10 +55,6 @@ from the remote.
 &nbsp; **remotePage** response is passed to **localPage** contructor instance as first parameter.
 
 &nbsp; **localPage** parses response and create the relevant elements matching the response with inject method.
-
-&nbsp; Scripts need a specific treatment because of *dom re-create requirement* with a onload bind event to allow
-&nbsp; them to be injected keeping the rolling dependencies order.
-
     
 ## Compliancy
 
