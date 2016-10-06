@@ -6,6 +6,7 @@ var localPage = function (response) {
     this.metas = null;
     this.styles = null;
     this.scripts = null;
+    this.inlineScripts = null;
     this.header = null;
     this.container = null;
     this.footer = null;
@@ -70,6 +71,10 @@ var localPage = function (response) {
         }
         that.scripts = scripts;
         delete scripts;
+    }
+    
+    _setInlineScripts = function () {
+        that.inlineScripts = _selectAll('script:not([src])');
     }
 
     _setHeader = function () {
@@ -149,6 +154,19 @@ var localPage = function (response) {
         loadFile(0);
         return this;
     }
+    
+    this.injectInlineScripts = function (anchor) {
+        for (var i = 0, len = that.inlineScripts.length; i < len; i++) {
+            var inlineScript = document.createElement('script');
+            inlineScript.setAttribute('type', 'text/javascript');
+            inlineScript.setAttribute('data-ts', new Date().getTime());
+            inlineScript.innerHTML = that.inlineScripts[i].innerHTML;
+            inlineScript.innerText = that.inlineScripts[i].innerText;
+            anchor.appendChild(inlineScript);
+        }
+        return this;
+    }
+    
 
     this.init = function () {
         _setMetas();
@@ -156,6 +174,8 @@ var localPage = function (response) {
         this.styles = that.styles;
         _setScripts();
         this.scripts = that.scripts;
+        _setInlineScripts();
+        this.inlineScripts = that.inlineScripts;
         _setHeader();
         _setContainer();
         _setFooter();
