@@ -1,3 +1,12 @@
+
+
+/**
+ * remotePage
+ * 
+ * in charge of remote dom grabing trough Xhr request.
+ * 
+ * @returns {remotePage}
+ */
 var remotePage = function () {
     this.method = 'GET';
     this.url = null;
@@ -5,22 +14,46 @@ var remotePage = function () {
     this.callback = null;
     this.failCallback = null;
     this.debug = true;
-
+    
+    /**
+     * setMethod
+     * 
+     * @param {String} method
+     * @returns {remotePage}
+     */
     this.setMethod = function (method) {
         this.method = method;
         return this;
     }
     
+    /**
+     * setCallback
+     * 
+     * @param {Function} callback
+     * @returns {remotePage}
+     */
     this.setCallback = function (callback) {
         this.callback = callback;
         return this;
     }
-
+    
+    /**
+     * setUrl
+     * 
+     * @param {String} url
+     * @returns {remotePage}
+     */
     this.setUrl = function (url) {
         this.url = url;
         return this;
     }
     
+    /**
+     * setDebug
+     * 
+     * @param {Boolean} active
+     * @returns {remotePage}
+     */
     this.setDebug = function (active) {
         this.debug = active;
         return this;

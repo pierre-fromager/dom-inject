@@ -1,3 +1,12 @@
+
+/**
+ * localPage
+ * 
+ * in charge of local injection process.
+ * 
+ * @param {document} response
+ * @returns {localPage}
+ */
 var localPage = function (response) {
 
     var that = this;
