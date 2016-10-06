@@ -14,7 +14,7 @@ var localPage = function (response) {
     /**
      * _selectAll
      * 
-     * grab dom elements from response  for a given selector pattern 
+     * grab dom elements from response for a given selector pattern 
      * and retruns matching NodeList
      * 
      * @param {string} selector
