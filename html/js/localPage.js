@@ -262,7 +262,7 @@ var localPage = function (response) {
     /**
      * injectScripts
      * 
-     * Clone dom scripts from response re-create script element.
+     * Clone dom externals scripts from response re-create script element.
      * Wait for the external script to be loaded before loading the next.
      * Loading process is ordered and dependencies kept.
      * 
@@ -297,6 +297,10 @@ var localPage = function (response) {
     
     /**
      * injectInlineScripts
+     * 
+     * Clone dom internal scripts from response re-create script element.
+     * Set both innerHTML & innerText properties.
+     * Append to local page for a given anchor.
      * 
      * @param {DomElement} anchor
      * @returns {localPage}
