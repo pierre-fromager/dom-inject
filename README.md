@@ -54,7 +54,7 @@ from the remote.
 
 &nbsp; **remotePage** response is passed to **localPage** contructor instance as first parameter.
 
-&nbsp; **localPage** parses response and create the relevant elements matching the response with inject method.
+&nbsp; **localPage** parses response and create the relevant elements matching the response with inject appropriated method.
     
 ## Compliancy
 
