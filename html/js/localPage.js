@@ -236,7 +236,16 @@ var localPage = function (response) {
     _isArray = function (obj) {
         return (_getType(obj) === '[object Array]');
     }
-
+    
+    /**
+     * inject
+     * 
+     * clone dom from response and append to the given anchor
+     * 
+     * @param {DomElement} anchor
+     * @param {DomElement || NodelList || Array of DomElement} nodes
+     * @returns {localPage}
+     */
     this.inject = function (anchor, nodes) {
         var objType = _getType(nodes);
         if (objType !== '[object Null]') {
@@ -250,6 +259,16 @@ var localPage = function (response) {
         return this;
     }
     
+    /**
+     * injectScripts
+     * 
+     * Clone dom scripts from response re-create script element.
+     * Wait for the external script to be loaded before loading the next.
+     * Loading process is ordered and dependencies kept.
+     * 
+     * @param {DomElement} anchor
+     * @returns {localPage}
+     */
     this.injectScripts = function (anchor) {
         if (typeof files == 'undefined') {
             var files = [];
@@ -276,6 +295,12 @@ var localPage = function (response) {
         return this;
     }
     
+    /**
+     * injectInlineScripts
+     * 
+     * @param {DomElement} anchor
+     * @returns {localPage}
+     */
     this.injectInlineScripts = function (anchor) {
         for (var i = 0, len = that.inlineScripts.length; i < len; i++) {
             var inlineScript = document.createElement('script');
@@ -288,7 +313,13 @@ var localPage = function (response) {
         return this;
     }
     
-
+    /**
+     * init
+     * 
+     * grabs and set relatives properties from response
+     * 
+     * @returns {localPage}
+     */
     this.init = function () {
         _setMetas();
         _setStyles();
@@ -303,6 +334,11 @@ var localPage = function (response) {
         return this;
     }
 
+    /**
+     * main
+     * 
+     * start process if response is valid
+     */
     if (typeof this.response !== 'undefined') {
         this.init();
     }
