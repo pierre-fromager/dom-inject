@@ -8,12 +8,14 @@
  * @returns {remotePage}
  */
 var remotePage = function () {
+    
     this.method = 'GET';
     this.url = null;
     this.response = null;
     this.callback = null;
     this.failCallback = null;
     this.debug = true;
+    this.responseType = 'document'; 
     
     /**
      * setMethod
@@ -58,24 +60,41 @@ var remotePage = function () {
         this.debug = active;
         return this;
     }
-
+    
+    /**
+     * setResponse
+     * 
+     * @param {Boolean} active
+     * @returns {remotePage}
+     */
     this.setResponse = function (response) {
         this.response = response;
         return this;
     }
-
+    
+    /**
+     * getResponse
+     * 
+     * @returns {document}
+     */
     this.getResponse = function () {
         return this.response;
     }
     
-    this.getPayload = function () {
-        return this.payload;
-    }
-    
+    /**
+     * _readyStateLabels
+     * 
+     * @type Array
+     */
     var _readyStateLabels = [
         'unsent' , 'opened' , 'headers received' , 'loading' , 'done'
     ]
 
+    /**
+     * load
+     * 
+     * @returns {undefined}
+     */
     this.load = function () {
         var xhr = new XMLHttpRequest();
         var that = this;
@@ -103,7 +122,7 @@ var remotePage = function () {
         xhr.open(this.method, this.url);
         //xhr.setRequestHeader('x-ms-blob-type', 'BlockBlob')
         //xhr.setRequestHeader('x-ms-blob-content-type', 'image/png');
-        xhr.responseType = 'document';
+        xhr.responseType = this.responseType;
         xhr.send();
     }
 }
