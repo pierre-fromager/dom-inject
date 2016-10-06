@@ -4,13 +4,16 @@
     
 #### &nbsp;&nbsp; ...try dom injection !
 
-&nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , 2 libs implementation that let you remote dom injection from external source to a local page.
+&nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , fast & furious 2 libs 
+implementation that let you remote dom injection from external source to a local page.
 
 &nbsp;&nbsp; *Xhr request* usage implies *cross domain origin policy* to be set.
 
-&nbsp;&nbsp; You can easily set it with a *specific header* from yours favourite languages or middlewares.
+&nbsp;&nbsp; You can easily set it with a *specific header* from yours 
+favourite languages or middlewares.
 
-&nbsp;&nbsp; Keep in mind you need to trust a single domain or a domain list from the remote.
+&nbsp;&nbsp; Keep in mind you need to trust a single domain or a domain list 
+from the remote.
 
 
 ## Js Libs
@@ -34,14 +37,15 @@
 
 ### localPage.js
 
-#### 2 public methods
+#### 3 public methods
 
 * inject 
 * injectScript
+* injectInlineScripts
     
 ## Use Case
 
-* runInject.js
+* main.js
 
 ## Storyboard
 
