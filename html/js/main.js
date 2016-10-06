@@ -19,9 +19,9 @@ var lpInstance;
 function rpCallback() {
     lpInstance = new localPage(rpInstance.getResponse());
     var head = document.querySelector('head');
-    lpInstance.injectInlineScripts(head);
-    lpInstance.inject(head, lpInstance.styles);
-    lpInstance.injectScripts(head);
+    lpInstance.injectInlineScripts(head)
+        .inject(head, lpInstance.styles)
+        .injectScripts(head);
     var body = document.querySelector('body');
     lpInstance.inject(body, lpInstance.container);
 }
@@ -35,7 +35,8 @@ function rpCallback() {
  */
 function init() {
     rpInstance = new remotePage();
-    rpInstance.setMethod('GET').setUrl('http://laraops.pier-infor.fr/about')
+    rpInstance.setMethod('GET')
+        .setUrl('http://laraops.pier-infor.fr/about')
         .setCallback(rpCallback).load();
 }
 

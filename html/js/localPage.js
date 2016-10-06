@@ -320,7 +320,7 @@ var localPage = function (response) {
     /**
      * init
      * 
-     * grabs and set relatives properties from response
+     * grabs and set relevant properties from response
      * 
      * @returns {localPage}
      */
