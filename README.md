@@ -4,8 +4,11 @@
     
 #### &nbsp;&nbsp; ...try dom injection !
 
-&nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , lightweight & fast & furious 2 libs 
-implementation that let you remote dom injection from external source to a local page.
+&nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , lightweight & fast & furious.
+
+&nbsp;&nbsp; No dependencies required.
+
+&nbsp;&nbsp; 2 libs (localPage, remotePage) let you inject external resources to local page.
 
 &nbsp;&nbsp; *Xhr request* usage implies *cross domain origin policy* to be set.
 
