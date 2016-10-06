@@ -60,7 +60,7 @@ var localPage = function (response) {
     /**
      * _getPatchedDomElement
      * 
-     * patches src or href attribute to match a full domain url
+     * patches src or href attribute to match an absolute domain url
      * 
      * @param {DomElement} element
      * @param {String} baseURI
@@ -84,7 +84,14 @@ var localPage = function (response) {
         }
         return element;
     }
-
+    
+    /**
+     * _setStyles
+     * 
+     * grabs external css from response
+     * 
+     * @returns {undefined}
+     */
     _setStyles = function () {
         that.styles = _selectAll('link[type="text/css"],link[rel="stylesheet"]');
         var styles = [];
@@ -97,7 +104,14 @@ var localPage = function (response) {
         that.styles = styles;
         delete styles;
     }
-
+    
+    /**
+     * _setScripts
+     * 
+     * grabs external script from response
+     * 
+     * @returns {undefined}
+     */
     _setScripts = function () {
         that.scripts = _selectAll('script[src]');
         var scripts = [];
@@ -111,14 +125,35 @@ var localPage = function (response) {
         delete scripts;
     }
     
+    /**
+     * _setInlineScripts
+     * 
+     * grabs inline scripts from response
+     * 
+     * @returns {undefined}
+     */
     _setInlineScripts = function () {
         that.inlineScripts = _selectAll('script:not([src])');
     }
 
+    /**
+     * _setHeader
+     * 
+     * grabs header element from response
+     * 
+     * @returns {undefined}
+     */
     _setHeader = function () {
         that.header = _select('header');
     }
-
+    
+    /**
+     * _setContainer
+     * 
+     * grabs header element from response
+     * 
+     * @returns {undefined}
+     */
     _setContainer = function () {
         that.container = _select('.wrapper');
     }
