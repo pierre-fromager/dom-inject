@@ -36,6 +36,8 @@ from the remote.
 
 ### localPage.js
 
+&nbsp; Inject remote doms into the local document.
+
 #### 3 public methods
 
 * inject 
