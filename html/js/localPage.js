@@ -42,7 +42,6 @@ var localPage = function (response) {
     _setMetas = function () {
         that.metas = _selectAll('meta');
     }
-
     
     /**
      * _isValidUrl
@@ -158,14 +157,39 @@ var localPage = function (response) {
         that.container = _select('.wrapper');
     }
 
+    /**
+     * _setFooter
+     * 
+     * grabs footer element from response
+     * 
+     * @returns {undefined}
+     */
     _setFooter = function () {
         that.footer = _select('footer');
     }
 
+    /**
+     * _inject
+     * 
+     * appends a single node element to local page at given anchor dom element 
+     * 
+     * @param {DomElement} anchor
+     * @param {DomElement} node
+     * @returns {undefined}
+     */
     _inject = function (anchor, node) {
         anchor.appendChild(node);
     }
 
+    /**
+     * _injectMany
+     * 
+     * appends from NodeList to local page at given anchor dom element 
+     * 
+     * @param {DomElement} anchor
+     * @param {DomElement} node
+     * @returns {undefined}
+     */
     _injectMany = function (anchor, nodes) {
         for (var i = 0, len = nodes.length; i < len; i++) {
             _inject(anchor, nodes[i]);
@@ -173,6 +197,14 @@ var localPage = function (response) {
         return this;
     }
 
+    /**
+     * _isInstanciated
+     * 
+     * return true if object is an instance of, verifying constructor
+     * 
+     * @param {object} obj
+     * @returns {Boolean}
+     */
     _isInstanciated = function (obj) {
         return (
             (obj != null)
@@ -181,10 +213,26 @@ var localPage = function (response) {
         );
     }
     
+    /**
+     * _getType
+     * 
+     * return prototype name
+     * 
+     * @param {object} obj
+     * @returns {String}
+     */
     _getType = function (obj) {
         return (Object.prototype.toString.call(obj));
     }
     
+    /**
+     * _isArray
+     * 
+     * return true if obj is an array
+     * 
+     * @param {Mixed} obj
+     * @returns {Boolean}
+     */
     _isArray = function (obj) {
         return (_getType(obj) === '[object Array]');
     }
