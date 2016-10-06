@@ -4,7 +4,7 @@
     
 #### &nbsp;&nbsp; ...try dom injection !
 
-&nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , fast & furious 2 libs 
+&nbsp;&nbsp; **dom-inject** is a *vanilla js* , *ES5* , lightweight & fast & furious 2 libs 
 implementation that let you remote dom injection from external source to a local page.
 
 &nbsp;&nbsp; *Xhr request* usage implies *cross domain origin policy* to be set.
@@ -17,10 +17,6 @@ from the remote.
 
 
 ## Js Libs
-
-### common.js
-
-&nbsp; is ready function, means Dom Ready.
 
 ### remotePage.js
 
