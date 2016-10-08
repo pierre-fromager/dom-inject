@@ -38,11 +38,12 @@ from the remote.
 
 &nbsp; Inject remote doms into the local document.
 
-#### 3 public methods
+#### 4 public methods
 
 * inject 
 * injectScript
 * injectInlineScripts
+* setExclude
     
 ## Use Case
 
