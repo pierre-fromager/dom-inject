@@ -18,6 +18,10 @@ var lpInstance;
  */
 function rpCallback() {
     lpInstance = new localPage(rpInstance.getResponse());
+    lpInstance.setExclude([
+        '#content'
+        //, 'span'
+    ]);
     var head = document.querySelector('head');
     lpInstance
         .injectInlineScripts(head)
@@ -39,7 +43,7 @@ function init() {
     rpInstance
         .setMethod('GET')
         .setDebug(true)
-        .setUrl('http://laraops.pier-infor.fr/about')
+        .setUrl('http://laraops.pier-infor.fr/')
         .setCallback(rpCallback)
         .load();
 }

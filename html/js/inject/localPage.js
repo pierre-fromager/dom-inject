@@ -16,6 +16,7 @@ var localPage = function (response) {
     this.styles = null;
     this.scripts = null;
     this.inlineScripts = null;
+    this.execlude = [];
     this.header = null;
     this.container = null;
     this.footer = null;
@@ -247,6 +248,18 @@ var localPage = function (response) {
     }
     
     /**
+     * _removeNode
+     * 
+     * remove a node from the response
+     * 
+     * @param {Mixed} obj
+     * @returns {Boolean}
+     */
+    _removeNode = function (node) {
+        node.parentNode.removeChild(node);
+    }
+    
+    /**
      * inject
      * 
      * clone dom from response and append to the given anchor
@@ -322,6 +335,33 @@ var localPage = function (response) {
             inlineScript.innerHTML = that.inlineScripts[i].innerHTML;
             inlineScript.innerText = that.inlineScripts[i].innerText;
             anchor.appendChild(inlineScript);
+        }
+        return this;
+    }
+    
+    /**
+     * setExclude
+     * 
+     * remove from response nodes matching the exclude selector
+     * 
+     * @param {Array} exclude
+     * @returns {localPage}
+     */
+    this.setExclude = function(exclude) {
+        this.exclude = exclude;
+        for (var i = 0, len = this.exclude.length; i < len; i++) {
+            var nodes = this.response.querySelectorAll(this.exclude[i]);
+            var objType = _getType(nodes);
+            if (objType !== '[object Null]') {
+                var constructorName = nodes.constructor.name;
+                if (constructorName === 'NodeList' || _isArray(nodes)) {
+                    for (var i = 0, len = nodes.length; i < len; i++) {
+                        _removeNode(nodes[i]);
+                    }
+                } else {
+                    _removeNode(nodes[i]);
+                }
+            }
         }
         return this;
     }
