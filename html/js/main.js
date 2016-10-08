@@ -17,8 +17,9 @@ var lpInstance;
  * @returns {undefined}
  */
 function rpCallback() {
-    lpInstance = new localPage(rpInstance.getResponse());
-    lpInstance.setExclude([
+    lpInstance = new localPage(
+        rpInstance.getResponse()
+    ).setExclude([
         '#content'
         //, 'span'
     ]);
